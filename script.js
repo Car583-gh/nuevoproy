@@ -13,64 +13,57 @@ async function obtenerRoles() {
         console.log("Roles recibidos:", roles);
 
         const selectRoles = document.getElementById("roles");
-        //limpiar el menu desplegable antes de agregar opciones
-        selectRoles.innerHTML = '<option value="">-- Selecciona un Rol --</option>';
+        selectRoles.innerHTML = '<option value="">-- Selecciona un Rol --</option>'; 
+        roles.forEach(rol => { 
+            const option = document.createElement("option"); 
+            option.value = rol.id; 
+            option.textContent = rol.nombre; 
+            selectRoles.appendChild(option); 
+        }); 
+        //llamar a la funcion para cargar los roles al cargar la pagina
+obtenerRoles();
 
-//Verificar cada objeto de rol
-        roles.forEach((rol, index) => {
-            console.log(`Rol[${index}]:`,rol);
-
-            //crear una nueva opcion
-            const option = document.createElement("option");
-            option.value = rol.id;
-            option.textContent = rol.nombre;
-            selectRoles.appendChild(option);
-        });
+    //Agregar la opcion "Otro/Añadir al final"
+    const opcionOtro = document.createElement("option");
+    opcion.value = "otro";
+    opcionOtro.textContent = "Otro/Añadir";
+    selectRoles.appendChild(opcionOtro);
         console.log("Opciones agregadas al menu desplegable.");
     } catch (error) {
         console.error("Error al obtener roles:", error);
     }
 }
+    // Manejar la selección del menú desplegable de roles 
+    function manejarSeleccionRol() { 
+        const selectElement = document.getElementById('selectRol'); 
+        const selectValue = selectElement.value; 
+        if (selectValue === "nuevo") { 
+            const nuevoNombre = prompt("Introduce el nombre del nuevo rol:"); 
+            if (nuevoNombre) agregarNuevoRol(nuevoNombre); 
+            else selectElement.value = ""; // Reinicia la selección si no se introduce un nombre 
+            } else { obtenerPermisos(); } }
 
-// aplicar estilos al menu desplegable despues de cargar las opciones
-const select = document.getElementById('roles');
-select.style.color
-select.style.backgroundColor = 'beige';
-//aplicar estilos a cada opcion del menu
-for (let i = 0; i < select.options.length; i++){
-    select.options[i].style.color = 'black';
+    // Función para agregar un nuevo rol a la base de datos 
+    async function agregarNuevoRol(nombre) { 
+        try { 
+            const response = await fetch(`${apiUrl}/roles`, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nombre }) }); 
+                if (response.ok) { 
+                    obtenerRoles(); // Refresca el menú desplegable de roles 
+                    mostrarMensajeExito("Rol añadido correctamente."); } 
+                    else { mostrarMensajeError('Error al agregar el nuevo rol.'); } 
+                } catch (error) { 
+                    console.error("Error al agregar el nuevo rol:", error); 
+                    mostrarMensajeError('Error al agregar el nuevo rol.'); } }
+  
+// mostrar mensajes de exito y error
+function mostrarMensajeExito() {
+    document.getElementById('successMessage').style.display = 'block';
+    document.getElementById('errorMessage').style.display = 'none';
 }
 
-//llamar a la funcion para cargar los roles al cargar la pagina
-obtenerRoles();
-
-// Obtener permisos de un rol seleccionado
-async function obtenerPermisos() {
-    const selectElement = document.getElementById('selectRol').value;
-    const selectValue = selectElement ? selectElement.value : null;
-
-    try {
-        const response = await fetch(`${apiUrl}/roles/${rolId}/permisos`);
-        if (!response.ok) {
-            throw new Error("Error en la respuesta de la API");
-        }
-        const permisos = await response.json();
-        console.log("Permisos recibidos:", permisos);
-
-        const listaPermisos = document.getElementById("listaPermisos");
-        listaPermisos.innerHTML = ""; // Limpiar la lista
-
-        permisos.forEach((permiso, index) => {
-            console.log(`Permiso[${index}]:`, permiso);
-
-            const listItem = document.createElement("li");
-            listItem.textContent = permiso.nombre_permiso;
-            listaPermisos.appendChild(listItem);
-        });
-    } catch (error) {
-        console.error("Error al obtener permisos:", error);
-    }
+function mostrarMensajeError() {
+    document.getElementById('errorMessage').style.display = 'block';
+    document.getElementById('successMessage').style.display = 'none';
 }
-
-// Llamar a la función para obtener roles al cargar la página
-document.addEventListener("DOMContentLoaded", obtenerRoles);

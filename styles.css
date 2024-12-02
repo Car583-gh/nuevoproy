@@ -1,34 +1,137 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', 'Arial', sans-serif;
     margin: 20px;
+    background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png');
+    background-color: #9b9ea1e7;
+    color: #343a40;
+}
+
+header { 
+    background-color: #343a40 !important; 
+    padding: 20px 0;
+}
+
+header h1 {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0;
+}
+    
+.form-label { 
+    font-family: 'Montserrat', sans-serif;
+    color: #495057; 
+} 
+    
+.form-select { 
+    border-color: #ced4da; 
+    color: #495057; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #f0f0f0;
+}
+
+#listaPermisos .list-group-item { 
+    font-family: 'Roboto', sans-serif !important; /* Usar fuente distinguida */ 
+    background-color: #f0f0f0 !important; /* Cambiar el fondo a gris claro */ 
+    color: #343a40 !important; /* Cambiar color del texto */ 
+    border: 1px solid #ccc !important; /* Añadir borde */ 
+    font-style: italic !important; /* Añadir estilo cursiva */ 
+    padding: 10px !important; /* Añadir padding para mejor legibilidad */
+}
+    
+h1, h2 {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
 }
 
 h1 {
-    color: #333;
+    color: #ffffff;
 }
 
-#permisosContainer {
-    margin-top: 20px;
+h2 {
+    color: #343a40;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-   margin-bottom: 10px;
+.container {
+    max-width: 800px;
+    margin: auto;
 }
 
 select {
     color:black !important;
-    background-color: rgb(224, 224, 15) !important;
+    background-color: #a2d9ce !important;
     border: 1px solid #ccc;
     padding: 5px;
     font-size: 16px !important;
+    font-family: 'Lato', sans-serif;
+    border-radius: 4px;
 }
 
 option {
     color: black !important;
     background-color: azure!important;
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    padding: 10px;
+}
+
+/* Estilos personalizados para los botones de acción */
+.btn-custom-save {
+    background-color: #28a745; /* Color verde para guardar */
+    color: #ffffff; /* Color del texto blanco */
+    border: 2px solid #28a745; /* Borde verde */
+    border-radius: 25px; /* Bordes redondeados */
+    padding: 10px 20px; /* Padding para mayor tamaño del botón */
+    font-family: 'Playfair Display', serif; /* Fuente elegante */
+    font-size: 18px; /* Tamaño de fuente */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+}
+
+.btn-custom-save:hover { 
+    background-color: #218838; /* Cambio de color de fondo al pasar el mouse */ 
+    border-color: #218838; /* Cambio de color del borde */  
+    transform: scale(1.05);
+}
+
+.btn-custom-cancel {
+    background-color: #dc3545; /* Color rojo para cancelar */
+    color: #ffffff; /* Color del texto blanco */
+    border: 2px solid #dc3545; /* Borde rojo */
+    border-radius: 25px; /* Bordes redondeados */
+    padding: 10px 20px; /* Padding para mayor tamaño del botón */
+    font-family: 'Playfair Display', serif; /* Fuente elegante */
+    font-size: 18px; /* Tamaño de fuente */
+    transition: all 0.3s ease; /* Transición suave para efectos */
+}
+
+.btn-custom-cancel:hover { 
+    background-color: #c82333; /* Cambio de color de fondo al pasar el mouse */ 
+    border-color: #c82333; /* Cambio de color del borde */ 
+    transform: scale(1.05);
+}
+
+/* Botón de Editar */
+.btn-editar {
+    background-color: #f0ad4e; /* Color naranja para el botón de Editar */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Botón de Eliminar */
+.btn-eliminar {
+    background-color: #d9534f; /* Color rojo para el botón de Eliminar */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }

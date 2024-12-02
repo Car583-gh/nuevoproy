@@ -12,7 +12,6 @@ router.get('/roles', async (req, res) => {
     }
 });
 
-
 //Ruta para obtener permisos de un rol
 router.get('/roles/:id/permisos', async (req, res) => {
     const { id } = req.params;
@@ -37,4 +36,26 @@ router.get("/permisos", async (req, res) => {
     }
 });
 
+// Endpoint para actualizar un permiso 
+router.put('/permisos/:id', async (req, res) => { 
+    const { id } = req.params; 
+    const { nombre_permiso } = req.body; 
+    try { 
+        const result = await pool.query('UPDATE permisos SET nombre_permiso = $1 WHERE id_permiso = $2', [nombre_permiso, id]); 
+        res.sendStatus(200); } catch (error) { 
+            console.error('Error al actualizar el permiso:', error); 
+            res.status(500).send('Error al actualizar el permiso'); 
+        }
+     });
+     
+// Endpoint para eliminar un permiso 
+router.delete('/permisos/:id', async (req, res) => { 
+    const { id } = req.params; 
+    try { 
+        const result = await pool.query('DELETE FROM permisos WHERE id_permiso = $1', [id]); 
+        res.sendStatus(200); } catch (error) { 
+            console.error('Error al eliminar el permiso:', error); 
+            res.status(500).send('Error al eliminar el permiso'); 
+        }
+     });
 module.exports = router;
